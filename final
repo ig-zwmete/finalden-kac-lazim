@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Final Notu Hesapla - Fenerbahçe</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #FFD500, #003A6F);
+      color: #003A6F;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background: #003A6F;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+      text-align: center;
+      width: 320px;
+      color: #FFD500;
+      position: relative;
+    }
+    .logo {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 15px auto;
+      display: block;
+      user-select: none;
+    }
+    h2 {
+      margin-top: 0;
+      margin-bottom: 20px;
+      font-weight: bold;
+      font-size: 26px;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      color: #003A6F;
+      background: #FFD500;
+      font-weight: bold;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px;
+      width: 100%;
+      background-color: #FFD500;
+      color: #003A6F;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #FFC700;
+    }
+    .result {
+      margin-top: 20px;
+      font-size: 22px;
+      font-weight: bold;
+      color: #FFD500;
+    }
+    .note {
+      margin-top: 10px;
+      font-size: 14px;
+      color: #FFE066;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img src="https://upload.wikimedia.org/wikipedia/tr/8/86/Fenerbah%C3%A7e_SK.png" alt="Fenerbahçe Logosu" class="logo" />
+    <h2>Final Notu Hesapla</h2>
+    <input type="number" id="vize" placeholder="Vize Notu (0-100)">
+    <button onclick="hesapla()">Hesapla</button>
+    <div class="result" id="sonuc"></div>
+    <div class="note">* Final barajı = 50</div>
+  </div>
+
+  <script>
+    function hesapla() {
+      const vize = parseFloat(document.getElementById('vize').value);
+      const vizeYuzdesi = 0.4;
+      const finalYuzdesi = 0.6;
+      const gecmeNotu = 60;
+
+      if (isNaN(vize) || vize < 0 || vize > 100) {
+        document.getElementById('sonuc').textContent = "";
+        return;
+      }
+
+      const gerekenFinal = (gecmeNotu - (vize * vizeYuzdesi)) / finalYuzdesi;
+      const gereken = gerekenFinal < 0 ? 0 : gerekenFinal.toFixed(2);
+
+      document.getElementById('sonuc').textContent = gereken;
+    }
+  </script>
+</body>
+</html>
