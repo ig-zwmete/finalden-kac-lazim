@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Final not</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #FFD500, #003A6F);
+      color: #003A6F;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background: #003A6F;
+      padding: 30px 30px 40px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.7);
+      text-align: center;
+      width: 350px;
+      color: #FFD500;
+      user-select: none;
+    }
+    h2 {
+      margin: 0 0 25px 0;
+      font-weight: 900;
+      font-size: 28px;
+      letter-spacing: 2px;
+      text-shadow: 0 0 5px #FFC700;
+    }
+    input {
+      display: block;
+      margin: 10px auto 0 auto;
+      width: 80%;
+      padding: 12px 15px;
+      border: none;
+      border-radius: 10px;
+      font-size: 18px;
+      color: #003A6F;
+      background: #FFD500;
+      font-weight: 700;
+      box-shadow: inset 0 0 5px #e6c600;
+      transition: background-color 0.3s ease;
+    }
+    input:focus {
+      outline: none;
+      background-color: #ffe733;
+    }
+    button {
+      margin-top: 25px;
+      padding: 12px 0;
+      width: 100%;
+      background-color: #FFD500;
+      color: #003A6F;
+      border: none;
+      border-radius: 10px;
+      font-size: 18px;
+      font-weight: 900;
+      cursor: pointer;
+      box-shadow: 0 0 10px #ffea00;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #ffc700;
+    }
+    .result {
+      margin-top: 28px;
+      font-size: 24px;
+      font-weight: 900;
+      color: #FFD500;
+      text-shadow: 0 0 8px #ffe066;
+      min-height: 30px;
+    }
+    .note {
+      margin-top: 12px;
+      font-size: 14px;
+      color: #ffe066;
+      font-weight: 600;
+      user-select: text;
+    }
+  </style>
+</head>
+<body>
+  <div class="container" role="main" aria-label="Final not">
+    <h2>Final</h2>
+    <input
+      type="number"
+      id="vize"
+      placeholder="Vize Not"
+      min="0"
+      max="100"
+      aria-describedby="final-baraji"
+    />
+    <button onclick="hesapla()">Hesapla</button>
+    <div class="result" id="sonuc" aria-live="polite" aria-atomic="true"></div>
+    <div class="note" id="final-baraji">* Final barajı = 50</div>
+  </div>
+
+  <script>
+    function hesapla() {
+      const vize = parseFloat(document.getElementById('vize').value);
+      const vizeYuzdesi = 0.4;
+      const finalYuzdesi = 0.6;
+      const gecmeNotu = 60;
+      const minFinalBaraji = 50;
+
+      if (isNaN(vize) || vize < 0 || vize > 100) {
+        document.getElementById('sonuc').textContent = "";
+        return;
+      }
+
+      let gerekenFinal = (gecmeNotu - (vize * vizeYuzdesi)) / finalYuzdesi;
+      gerekenFinal = gerekenFinal < 0 ? 0 : gerekenFinal;
+
+      if (gerekenFinal < minFinalBaraji) {
+        gerekenFinal = minFinalBaraji;
+      }
+
+      document.getElementById('sonuc').textContent = gerekenFinal.toFixed(2);
+    }
+  </script>
+</body>
+</html>
